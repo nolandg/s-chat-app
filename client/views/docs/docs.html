@@ -1,0 +1,392 @@
+<template name="docs">
+    <div class="s-chat-client-app-header">
+        <div class="client-app-header-left {{#if isSidebarClosed}}closed{{/if}}">
+            <div>Getting Started</div>
+        </div>
+        <div class="client-app-header-right">
+            <div class="wrapper">
+                <div class="left">
+                    <a href="#" class="js-toggle-sidebar">
+                        <i class="{{#if isSidebarClosed}}ti-arrow-circle-right{{else}}ti-arrow-circle-left{{/if}} client-app-header-tools" title="Toggle sidebar"></i>
+                    </a>
+                </div>
+                <div class="right"></div>
+            </div>
+        </div>
+    </div>
+    <div class="s-chat-client-app-main">
+        <div class="client-app-sidebar {{#if isSidebarClosed}}closed{{/if}}">
+            <ul class="client-app-sidebar-list">
+                <li>
+                    <a href="#about" class="js-docs-link">
+                        <i class="ti-angle-double-right"></i> About
+                    </a>
+                </li>
+                <li>
+                    <a href="#free-option" class="js-docs-link">
+                        <i class="ti-angle-double-right"></i> Free Option
+                    </a>
+                </li>
+                <li>
+                    <a href="#self-hosted-option" class="js-docs-link">
+                        <i class="ti-angle-double-right"></i> Self-hosted Option
+                    </a>
+                </li>
+                <li>
+                    <a href="#schat-features" class="js-docs-link">
+                        <i class="ti-angle-double-right"></i> sChat Features
+                    </a>
+                </li>
+                <li>
+                    <a href="#privacy-security" class="js-docs-link">
+                        <i class="ti-angle-double-right"></i> Privacy/Security Policy
+                    </a>
+                </li>
+                <li>
+                    <a href="#support" class="js-docs-link">
+                        <i class="ti-angle-double-right"></i> sChat/Meteor Support
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="client-app-content docs">
+            <div class="client-app-content-docs">
+                {{> Template.dynamic template=docsContent}}
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="docs-about">
+    <h1>About sChat</h1>
+    <p>
+        sChat (or SimpleChat or SimpleChat.Support) is an open source and very basic live chat app written by a JavaScript/Meteor developer. It is free and MIT licensed. You can use it in a <a href="https://pl.wikipedia.org/wiki/Software_as_a_Service">SaaS</a>-like model on this website or you can also create your own self-hosted copy of the app. If you need to, you can also take a look at the code and copy some parts of the app. This is a great option when you already have your Meteor app and you just need to integrate SimpleChat admin panel into it. You can modify the app as you want and leaving a link to the original version somewhere would be much appreciated, contributing as well. More about self-hosted option, support etc. in an separate section about it.
+    </p>
+    <h2>How it works?</h2>
+    <p>
+        SimpleChat Meteor app is divided into two logical parts. First is the main Meteor app - a good example is this website with an administration panel for logged in operators/administrators. The second part is a client app widget, which is just two files - JavaScript and CSS file. The client app widget could be also a Meteor package or any other future, ready-to-use integration. The two parts are separate and communicate using only special protocol named <a href="https://www.meteor.com/ddp">DDP</a>.
+    </p>
+    <p>
+        As an operator, this allows you to log in and see all chat sessions from your all connected client websites - the websites where you've installed the client widget. This way, your visitors will be able to see the chat widget and write directly to you and you’ll be able to log in to your admin account and reply. You can also enable e-mail notifications, so with every new chat session, an e-mail will be sent to your mailbox.
+    </p>
+    <p>
+        This app is similar to many other available live chat apps out there. It only has basic functionality and the main app is built with Meteor. If you don't like this approach or you need something with more features, this is not for you. But if you just need a chat box widget for free with flexible options and simple Meteor integration (just add the package in your Meteor app), this app is for you.
+    </p>
+    <h2>How to start?</h2>
+    <p>It depends which option you want to use...</p>
+    <p>
+        1. If you don't mind using it here as a SaaS, you just need to create your account. You only need your e-mail address and a username. Your app and chat history will be safe on <a href="https://www.meteor.com/galaxy">Galaxy (cloud storage dedicated for Meteor apps)</a> with SSL and <a href="https://mongolab.com/">MongoLab</a> database hosting. After that you will be able to create a client app instance, download your chat widget installation files (2 files or for Meteor apps just install a Meteor package), and install the chat widget on your website. You'll be able to install it on maximum 3 different websites, then you can monitor them from your admin panel on SimpleChat.Support. How do you do this? There is a section about it here: <a href="#free-option" class="js-docs-link">Free Option</a>.
+    </p>
+    <p>
+        2. If you want to host your own admin app, the procedure is the same as for the website. You can download (git clone) the entire app from the <a href="https://github.com/juliancwirko/s-chat-app/issues">GitHub repository</a>. This is a standard Meteor app so you need to have Meteor installed and you also need Meteor hosting for production. You'll read more about it here: <a href="#self-hosted-option" class="js-docs-link">Self-hosted Option</a>.
+    </p>
+    <p>
+        If you need, I can offer paid support and customizations and new features for you in the self-hosted Option. In this case, take a look at this section: <a href="#s-chat-support" class="js-docs-link">sChat Support</a>. You can also send me your feature requests for SaaS version (first option).
+    </p>
+    {{> docsPagination
+        nextURL="#free-option"
+        nextTitle="Free Option"}}
+</template>
+
+<template name="docs-free-option">
+    <h1>How to use the free option in SaaS model</h1>
+    <h2>1. Account creation</h2>
+    <p>
+        First, you need to create an account. Just go to the <a href="/sign-up">sign-up</a> page and create your account by providing an e-mail and username or just by using your Facebook or Google+ account. For standard account creation, please provide your real e-mail address, otherwise it may be impossible to use some of the functionalities available in the app. There will be no unwanted spam messages from the app.
+    </p>
+    <h2>2. Adding new client website/app</h2>
+    <p>
+        After creating your account, you’ll be able to <a href="/sign-in">sign in</a> to your operator/admin panel. You'll see the client app creation form. Using this, you can add max 3 different client apps with one account, all you need to do is to provide the client app name. It could be any name you want, for example the name of your website or your domain name. The new app will get a uniq app ID. Each app will be represented as a separated block with information such as ID and links to files which you need to download and install on your website.
+    </p>
+    <p>First, let's see how to install your chat box on a standard website.</p>
+
+    <h2>3. Installing sChat box on a standard website</h2>
+    <p>After client app creation, you will be able to download static .js and .css files. in your sChat admin panel.</p>
+    <p>
+        When you download .js and .css files, you need to include it in your website the same way as other JavaScript libraries (for example jQuery plugins). All you need to do is to include .css file in your 'head' of the html and .js file at the end of your 'body' tag. It will also work if you place it in your 'head' tag. So it could look like the example below.
+    </p>
+
+{{#markdown}}
+```html
+<html>
+    <head>
+        <link rel="stylesheet" href="path-to/s-chat-support.css">
+    </head>
+    <body>
+        <!-- your website's content here -->
+        <script src="path-to/s-chat-support.js"></script>
+    </body>
+</html>
+```
+{{/markdown}}
+
+    <p>
+        <strong>But that’s not all.</strong> After you include those files, you need to initialize your chat box and a JavaScript configuration. With all possible configuration options, it would look like this:
+    </p>
+
+{{#markdown}}
+```html
+<html>
+    <head>
+        <link rel="stylesheet" href="path-to/s-chat-support.css">
+    </head>
+    <body>
+        <!-- your website's content here -->
+        <script src="path-to/s-chat-support.js"></script>
+        <script>
+            sChat.init('JMSZtbT2RdNrPYYRi', {
+                ssl: true,
+                welcomeMessage: 'Hi, how can I help you?',
+                hostName: 'SimpleChat.Support',
+                labels: {
+                    sendPlaceholder: 'Send the message...',
+                    headerTitle: 'Welcome on my website!'
+                }
+            });
+        </script>
+    </body>
+</html>
+```
+{{/markdown}}
+
+    <p>Let's take a look at the configuration options:</p>
+
+{{#markdown}}
+```javascript
+sChat.init('JMSZtbT2RdNrPYYRi', { // client app id - get it from sChat admin panel
+    ssl: true, // SSL is in default enabled because on sChat we use SSL... anyway it should be used in any self hosted sChat app too
+    welcomeMessage: 'Hi, how can I help you?', // you can set up welcome message, if you don't want it at all just remove the line in the config
+    hostName: 'SimpleChat.Support', // in default it is SimpleChat.Support, you need to change it in Self-hosted option
+    labels: {
+        sendPlaceholder: 'Send the message...', // chatbox send message input placeholder
+        headerTitle: 'Welcome on my website!' // chatbox header title
+    }
+});
+```
+{{/markdown}}
+
+    <p>You can, of course, put the initialization in a separate file. It is important that the s-chat-support.js file was loaded before initialization.</p>
+    <p>There is a s-chat-support.css file provided where you can customize your chat box, but be careful because there are no limitations and some of the styling is responsible for chat box structure and positioning. You should really know what you’re doing, but I bet that it wouldn’t be too complicated for you.</p>
+    <p>That’s basically it. When someone visits your website, there should be a small sChat icon in the bottom right corner. When someone click on it, the chat box should appear and visitor will be able to send messages which you will see in your admin on SimpleChat.Support website.</p>
+
+    <h2>4. Installing sChat box on Meteor website</h2>
+    <p>This is way simpler. There is a package for Meteor apps, which you can just add the same way as other packages.</p>
+
+{{#markdown}}
+```bash
+$ meteor add schat:client-blaze
+```
+{{/markdown}}
+
+    <p>For now there is only a package for Blaze view layer but there will be also React one. You should be able to use static .js and .css files in Meteor app too, but that isn’t recommended.</p>
+
+    <p>Include sChatBox template in your main layout in the app (<strong>of course without spaces between curly braces</strong>):</p>
+
+{{#markdown}}
+```html
+<body>
+    { {> sChatBox } }
+</body>
+```
+{{/markdown}}
+
+    <p>Next, you’ll also need to set up the configuration. Do it the same way as above, but in the Meteor startup callback on the client side. See this example:</p>
+
+{{#markdown}}
+```javascript
+Meteor.startup(function () {
+    sChat.init('JMSZtbT2RdNrPYYRi', {
+        ssl: true,
+        welcomeMessage: 'Hi, how can I help you?',
+        hostName: 'SimpleChat.Support',
+        labels: {
+            sendPlaceholder: 'Send the message...',
+            headerTitle: 'Welcome on my website!'
+        }
+    });
+});
+```
+{{/markdown}}
+
+    <h2>5. Installation help</h2>
+    <p>
+        If you’re stuck on something in the installation process, let me know. You will find me on <a href="https://twitter.com/JulianCwirko">Twitter</a> and you can also send me an e-mail: julian.cwirko@gmail.com
+    </p>
+    <p>Please try to describe the problem as well as you can. Remember that this is not guaranteed support in any way. Just my desire to help.</p>
+
+    {{> docsPagination
+        nextURL="#self-hosted-option"
+        nextTitle="Self-hosted Option"
+        prevURL="#about"
+        prevTitle="About"}}
+</template>
+
+<template name="docs-self-hosted-option">
+    <h1>Self-hosted Option</h1>
+    <p>
+        sChat is an open source and MIT licensed app so you can just copy it, modify it, and use it on your own Meteor server. It is built into Meteor, so basic knowledge of Meteor and related packages is necessary here. If you don't know Meteor and want to learn it, just go to the <a href="https://www.meteor.com/install">tutorials website</a>. You can also see the <a href="http://guide.meteor.com/">Meteor Guide</a>. If you just want a working app and need a Meteor developer, you can check the website: <a href="https://www.weworkmeteor.com/">We Work Meteor</a> or you can just hire me :) In that case, take a look at the <a href="#s-chat-support" class="js-docs-link">sChat Support section</a>.
+    </p>
+
+    <h2>sChat App Structure</h2>
+
+    <p>sChat is a standard Meteor app with Blaze as a view layer. For now, it’s Blaze because it is sufficient and really simple to learn so many people who want to use the self-hosted version will be able to start very quickly. However, if there are more features and problems with performance and code management in the future, it is more likely that it will be rewritten in, for example, React. But for now it is Blaze and it will stay here.</p>
+
+    <p>
+        The folder and file structure is quite standard. We have 'client', 'server', 'both' and 'public' folders - <a href="http://docs.meteor.com/#/full/structuringyourapp">standard Meteor folders</a>. In the ‘client', you'll find some other parts which are self-explanatory. There are Blaze views with logic, client side collections and, of course, styles. In the 'server' folder, we have all server side logic so publications, methods, and configurations. In the 'both' folder, we have the collection initialization and also routing settings.
+    </p>
+
+    <h2>Meteor packages</h2>
+
+    <p>
+        There are some Meteor packages used in this app, some of which are community based. You can find the list in the '.meteor/packages' file. You can also run the command 'meteor list' to list all used packages. If you want to know more about them, just Google them or try to find them on <a href="https://atmospherejs.com/">Atmospherejs.com</a>.
+    </p>
+
+    <h2>sChat App Settings</h2>
+    <p>There are some settings which are needed to run your own instance of sChat App. These are located in the standard Meteor's .json files. Here we have 2 types of settings files in the 'settings' folder. There is 'prod.json' file and also 'dev.json' file. This is because, in most cases, you want to have one configuration for local development and one for production. Remember that you shouldn't put theses files in your public repositories. Those are private settings which shouldn't be published anywhere.</p>
+    <p>Let's see what we can set up here:</p>
+
+{{#markdown}}
+```javascript
+{
+    "public": {
+        "hostName": "SimpleChat.Support",
+        "maxClientApps": 3,
+        "maxChatHistoryInDays": 3
+    },
+    "private": {
+        "mainAppEmail": "your-email-address@gmail.com",
+        "mailGun": "smtp://{Default SMTP Login}:{Default Password}@{SMTP Hostname}:587",
+        "google": {
+            "clientId": "{your google API client id here}",
+            "secret": "{your google API secret key here}"
+        },
+        "facebook": {
+            "appId": "{your facebook API app id here}",
+            "secret": "{your facebook API secret key here}"
+        }
+    }
+}
+```
+{{/markdown}}
+
+    <p>
+        Host name and main app e-mail are needed to configure e-mail messages. Max client apps and max chat history are just limitations for available client apps per account and chat message history in days. Next, you have very important settings related to 3rd party services. sChat app needs some e-mail service to be able to send e-mails. Here we use <a href="https://mailgun.com">MailGun</a>. You need to create your account at Mailgun.com and then fill in the 'mailGun' field with your credentials in the settings files.
+    </p>
+
+    <p>
+        Next we have special Google and Facebook API keys which are needed when you want to use 'login with Google', 'login with Facebook' buttons. You can disable these features in 'both/accounts/s-id-config.js'. It is provided by the sId Meteor package. You can read more about it here: <a href="http://s-id.meteor.com">s-id.meteor.com</a>.
+    </p>
+
+    <p><strong>Important:</strong> When you provide all those settings, you need to run your Meteor app with '--settings' flag. Example.</p>
+
+{{#markdown}}
+```bash
+$ meteor --settings settings/dev.json
+```
+{{/markdown}}
+
+{{#markdown}}
+```bash
+$ meteor --settings settings/prod.json
+```
+{{/markdown}}
+
+    <h2>Where can I host my custom sChat app?</h2>
+    <p>You need NodeJS based hosting and also MongoDB hosting.</p>
+    <p>
+        There are couple of options. You can use special Meteor apps dedicated to the cloud hosting called Galaxy. There is a developer option which is much cheaper than others. <a href="https://www.meteor.com/why-meteor/pricing">Galaxy</a> is great because it gives you many preconfigured features, like simple SSL installation, one-line-command deploys, statistics and support. It is managed by Meteor Development Group, so the support team knows exactly what Meteor apps need.
+    </p>
+    <p>
+        But many people host their Meteor apps in many other ways, for example on <a href="https://m.do.co/c/f2346a20e8ce">DigitalOcean</a> using the tool called <a href="https://github.com/arunoda/meteor-up">MUP</a>. There is also <a href="https://modulus.io/">Modulus</a>, which is very popular in the Meteor community.
+    </p>
+    <p>
+        With Galaxy and other options, you’ll also need MongoDB hosting. There are some services, for example <a href="https://www.compose.io/">Compose.io</a> or <a href="https://mongolab.com/">MongoLab</a>. If you want, you can also create your own hosting environment. Many people host MongoDB and app files in one place, for example on <a href="https://m.do.co/c/f2346a20e8ce">DigitalOcean</a>.
+    </p>
+    <p>SimpleChat.Support is hosted on Galaxy and MongoLab.</p>
+
+    <h2>I need help!</h2>
+    <p>
+        If you don't want to use sChat here as a SaaS free option, and you need your own version of the app but you don't know how to run your own, you could search for help in the <a href="https://forums.meteor.com/">Meteor forums</a> or <a href="https://www.weworkmeteor.com/">We Work Meteor</a> website.
+    </p>
+    <p>
+        I can also offer you my help. Take a look here: <a href="#s-chat-support" class="js-docs-link">sChat/Meteor Support</a>.
+    </p>
+
+    {{> docsPagination
+        prevURL="#free-option"
+        prevTitle="Free Option"
+        nextURL="#schat-features"
+        nextTitle="sChat Features"}}
+</template>
+
+<template name="docs-schat-features">
+    <h1>sChat admin panel features</h1>
+    <p>There are some major features which we should describe here. First of all, when you log in, you'll see all your existing client apps. You can go and see chat sessions in a particular app by clicking on the 'Open Chats' button. This will redirect you to the chat sessions view. On the left you'll have the chat sessions list and on the right chat boxes panel. You can open a chat box by clicking on the list's item in the sidebar on the right side. When the chat box opens, you are ready to reply.</p>
+    <p>The chat sessions list has some very useful icon buttons. We will describe them in the sections below.</p>
+    <h2>Chat sessions list</h2>
+    <p>This is a list of all chat sessions. They could be current chats or those from the archive. So, how do you know which is an active chat and which is not?</p>
+    <p>
+        This is really quite simple. All chats which you haven’t yet replied to will have the 'bell icon' beside it. This icon looks like that: <i class="ti-bell docs-icon"></i>. It will appear when there is a new message from your client. When you answer the icon disappears. What if you don't answer? The icon will still be there, but you can always check the last message date and time on the list and decide if there is a need to answer.
+    </p>
+    <p>All chat sessions will be automatically deleted when the first client message in the session is older than three days.</p>
+    <p>
+        When you click on an item on the list, chat box will open. Also you will find the 'message' icon near the clicked list item which looks like: <i class="ti-comment-alt docs-icon"></i>. This means that the current chat session is open and displayed as a chat box.
+    </p>
+    <p>
+        There are two more icon buttons on the chat sessions list. With these icons, you can ban users by IP. The icon looks like: <i class="ti-na docs-icon"></i> and also you can remove all chat messages by user IP or Session ID. The icon looks like <i class="ti-close docs-icon"></i>. Icons will appear when your mouse cursor is over a particular item, which is hard to miss. When you click on the 'ban' icon, there should be a modal box with confirmation, but you’re able to undo this operation if you choose. If you click on the 'remove' icon, there should be a modal box with two radio inputs (remove by IP and remove by Session Id).
+    </p>
+
+    <h2>Ban list and E-mail notifications</h2>
+    <p>On the particular client app view where you can open chat boxes in the top right corner, you’ll find some of the icons which are responsible for managing banned IP addresses and e-mail notifications.</p>
+    <p>
+        When you want to add or remove an IP address to/from your ‘ban-list’, you can click on the flag icon which should look like <i class="ti-flag docs-icon"></i>. It will open a modal box with all banned IP addresses and you can add more or remove some as you wish.
+    </p>
+    <p>E-mail notifications is a really cool feature because it can send you a new e-mail when a new chat session appears, so you don't need to track your chat sessions list all the time. In the future, there will be more notification options.</p>
+    <p>Other icons here are just help icons and they aren’t that important.</p>
+
+    <h2>User account operations</h2>
+    <p>You can, of course, delete your user account any time you want. Just remember that all your client apps will be removed too and all your chat boxes will stop working. You can also change your password. All the buttons are in the top right corner of the website, of course when you are logged in.</p>
+</template>
+
+<template name="docs-privacy-security">
+    <h1>sChat Privacy and Security Policy</h1>
+    <p>SimpleChat.Support app provides service in a SaaS-like model under the domain www.simplechat.support. You can also run your own instance on your private Meteor hosting and then all data remains on your server.</p>
+    <p>SimpleChat.Support assumptions about privacy and security:</p>
+    <ul>
+        <li>We will not use or share your information with anyone.</li>
+        <li>We use your e-mail for providing and improving sChat app.</li>
+        <li>We use commercially acceptable means to protect your personal information.</li>
+        <li>Access to stored user data is password protected and passwords are account specific.</li>
+        <li>All chat sessions and user data are maintained and archived on secure servers.</li>
+        <li>All passwords are stored via a one-way hash. This means nobody, not even we, can see or decrypt it.</li>
+        <li>No customer can view data for another customer.</li>
+        <li>SimpleChat.Support provides secure a SSL connection. (When using the self-hosted option, you should provide SSL by yourself.)</li>
+    </ul>
+</template>
+
+<template name="docs-support">
+    <h1>sChat or/and Meteor support</h1>
+    <p>If you need help with the self-hosted option or if you need help with Meteor as a whole platform I can offer you paid support. I am able to help with Meteor, React, Blaze, Cordova, and also standard Front-end stuff.</p>
+    <p>
+        You can check who I am and what I do by visiting my website at julian.io. You can also check my <a href="https://github.com/juliancwirko">GitHub</a> or <a href="https://atmospherejs.com/juliancwirko">Atmosphere</a> account.
+    </p>
+    <p>Additionally, you can send all ideas and feature requests which you would like to see here in the SimpleChat.Support app.</p>
+    <p>
+        You can contact me by writing an e-mail to: <strong>julian.cwirko@gmail.com</strong> or you can write to me on <a href="https://twitter.com/JulianCwirko">Twitter</a>.
+    </p>
+</template>
+
+<template name="docsPagination">
+    <div class="docs-pagination">
+        {{#if prevURL}}
+            <a href="{{prevURL}}" class="js-docs-link docs-pagination-prev">
+                <i class="ti-angle-double-left"></i> Prev: {{prevTitle}}
+            </a>
+        {{/if}}
+        {{#if nextURL}}
+            <a href="{{nextURL}}" class="js-docs-link docs-pagination-next">
+                Next: {{nextTitle}} <i class="ti-angle-double-right"></i>
+            </a>
+        {{/if}}
+    </div>
+</template>

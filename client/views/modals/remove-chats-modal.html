@@ -1,0 +1,24 @@
+<template name="removeChatsModal">
+    <div class="s-chat-modal-content">
+        <h2 class="spacing-bottom">
+            Remove all chat messages by:
+        </h2>
+        <p>
+            <label for="remove-chat-by-id">
+                <input type="radio" id="remove-chat-by-id" name="s-chat-remove-input" checked>
+                <strong>{{userSessionId}}</strong> (Session Id)
+            </label>
+        </p>
+        <p class="spacing-bottom">
+            <label for="remove-chat-by-ip">
+                <input type="radio" id="remove-chat-by-ip" name="s-chat-remove-input">
+                <strong>{{clientIp}}</strong> (User IP)
+            </label>
+        </p>
+        <p>Remember that this is an irreversible action.</p>
+    </div>
+    <div>
+        <a href="#" class="s-chat-modal-cancel-button js-close-modal">Cancel</a>
+        <a href="#" class="s-chat-modal-confirm-button js-remove-chat-messages">Remove</a>
+    </div>
+</template>

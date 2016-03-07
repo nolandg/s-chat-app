@@ -1,0 +1,43 @@
+.s-chat-sign-up-form,
+.s-chat-login-form,
+.s-chat-forgot-password-form,
+.s-chat-reset-password-form
+    margin rem-calc(50) auto
+    max-width rem-calc(400)
+    width 95%
+    padding rem-calc(40)
+    background-color color-main-light
+    box-shadow 0 rem-calc(5) rem-calc(20) rgba(color-main-dark, .05), 0 rem-calc(15) rem-calc(30) rem-calc(-10) rgba(color-main-dark, .3)
+    h2
+        font-weight 300
+        font-size rem-calc(36)
+        margin-bottom rem-calc(45)
+        text-align center
+    form, input, button
+        width 100%
+    button, input[type=text],
+    input[type=password],
+    input[type=email]
+        text-transform initial
+        padding rem-calc(15) rem-calc(30)
+        font-weight 400
+    input[type=text],
+    input[type=password],
+    input[type=email]
+        border rem-calc(1) solid darken(color-main-light, 5%)
+        margin-bottom rem-calc(5)
+        outline none
+    #s-id-login-button,
+    #s-id-register-button,
+    #s-id-forgot-password-button,
+    #s-id-reset-password-button
+        background-color color-main-light
+        color color-main-contrast2
+        margin-bottom rem-calc(20)
+        border rem-calc(2) solid color-main-contrast2
+        border-radius rem-calc(2)
+        transition background-color .3s, color .3s
+        &:hover
+           background-color color-main-contrast2
+           color color-main-light
+

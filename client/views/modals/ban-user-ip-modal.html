@@ -1,0 +1,16 @@
+<template name="banUserIpModal">
+    <div class="s-chat-modal-content">
+        <h2 class="spacing-bottom">
+            Ban user by IP address
+        </h2>
+        <p>
+            Are you sure you want to ban user with the IP: <strong>{{clientIp}}</strong>
+        </p>
+        <p class="spacing-bottom">This IP will be blocked.</p>
+        <p>You'll be able to edit this change later.</p>
+    </div>
+    <div>
+        <a href="#" class="s-chat-modal-cancel-button js-close-modal">Cancel</a>
+        <a href="#" class="s-chat-modal-confirm-button js-ban-user-ip">Ban IP</a>
+    </div>
+</template>

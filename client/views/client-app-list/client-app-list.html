@@ -1,0 +1,72 @@
+<template name="clientAppList">
+    <div class="s-chat-client-app-header">
+        <div class="client-app-header-left">
+            <div>Client Apps</div>
+        </div>
+        <div class="client-app-header-right">
+            <div class="wrapper">
+                <div class="left">
+                    <a href="/docs" class="text-only">Getting Started</a>
+                </div>
+                <div class="right">
+                    <i class="ti-email client-app-header-tools js-email-notifications" title="Enable/Disable E-mail notifications about new chat sessions. It will use admin e-mail address."></i>
+                    <i class="ti-alert client-app-header-tools js-report-bug" title="Report a bug/feature"></i>
+                    <i class="ti-help-alt client-app-header-tools js-app-list-info" title="You can add up to 3 client apps, which means that you can install 3 chat boxes on 3 different websites"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="s-chat-client-app-main">
+        <div class="client-app-list-content">
+            <div class="centered-wrapper">
+                {{#if Template.subscriptionsReady}}
+                    <div class="s-chat-client-list">
+                        {{#each clients}}
+                            {{> clientItem}}
+                        {{else}}
+                            <div class="client-app-no-data">
+                                Add new client app, name it as you want... <br>
+                                You can have max 3 client apps at once.
+                            </div>
+                        {{/each}}
+                    </div>
+                    {{#if canAddMore}}
+                        <div class="s-chat-client-list-form">
+                            <input type="text" id="client-input" placeholder="New Client App name..." class="s-chat-client-add js-submit-new-client-input">
+                            <button type="button" class="s-chat-client-submit js-submit-new-client">Add New</button>
+                        </div>
+                    {{else}}
+                        <div class="client-app-no-data">
+                            You have already used up your client apps limit. <br>
+                            If you want to add another app you need to remove one ...
+                        </div>
+                    {{/if}}
+                {{else}}
+                    {{> spinner}}
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="clientItem">
+    <div class="s-chat-client-list-item">
+        <div class="item-header">
+            <div class="left">
+                <a href="/client/{{_id}}">{{name}}</a>
+            </div>
+            <div class="right">
+                <i class="ti-close js-remove-client-app" title="Remove client app."></i>
+            </div>
+        </div>
+        <div class="item-body">
+            <div><span class="label">App Id: </span>{{_id}} <i class="ti-help-alt" title="This is your Client App Id - you need it to identify your website with this account. Read more in the 'Getting Started' section."></i></div>
+            <div><span class="label">Client Files: </span><a href="/s-chat-support.zip" target="_blank" download>Download</a> <i class="ti-help-alt" title="Files to download. You need these to properly install scripts on your website."></i></div>
+            <div><span class="label">Integrations: </span><a href="https://atmospherejs.com/schat/client-blaze">Meteor Blaze</a> <i class="ti-help-alt" title="Here you can find some links to the hints on how to install it with Meteor."></i></div>
+        </div>
+        <a href="/client/{{_id}}" class="item-footer">
+            Open Chats
+        </a>
+    </div>
+</template>
+

@@ -1,0 +1,128 @@
+<template name="clientAppView">
+    <div class="s-chat-client-app-header">
+        <div class="client-app-header-left {{#if isSidebarClosed}}closed{{/if}}">
+            <div>{{#with client}}{{name}}{{/with}}</div>
+        </div>
+        <div class="client-app-header-right">
+            <div class="wrapper">
+                <div class="left">
+                    <a href="#" class="js-toggle-sidebar">
+                        <i class="{{#if isSidebarClosed}}ti-arrow-circle-right{{else}}ti-arrow-circle-left{{/if}} client-app-header-tools" title="Toggle sidebar"></i>
+                    </a>
+                </div>
+                <div class="right">
+                    <i class="ti-email client-app-header-tools js-email-notifications" title="Enable/Disable E-mail notifications about new chat sessions. It will use admin e-mail address."></i>
+                    <i class="ti-flag client-app-header-tools js-ban-list" title="Manage banned IP's"></i>
+                    <i class="ti-alert client-app-header-tools js-report-bug" title="Report a bug/feature."></i>
+                    <i class="ti-help-alt client-app-header-tools js-app-view-info" title="You can open chat boxes by clicking on the list items in sidebar."></i>
+                    {{#if openedChats.count}}
+                        <i class="ti-close client-app-header-tools js-chatbox-close-all" title="Close all chat boxes."></i>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="s-chat-client-app-main">
+        <div class="client-app-sidebar {{#if isSidebarClosed}}closed{{/if}}">
+            {{#if chats.length}}
+                {{#if Template.subscriptionsReady}}
+                    {{#each chats}}
+                        <div class="client-app-sidebar-chat-item">
+                            {{> chatItem}}
+                        </div>
+                    {{/each}}
+                {{else}}
+                    {{> spinner}}
+                {{/if}}
+            {{/if}}
+        </div>
+        <div class="client-app-content">
+            <div class="client-app-chat-boxes">
+                {{#if chats.length}}
+                    {{#each openedChats}}
+                        {{> chatBox}}
+                    {{else}}
+                        <div class="client-app-no-data">
+                            <span>You can open chat boxes.<br>Choose from the list on the left...</span>
+                        </div>
+                    {{/each}}
+                {{else}}
+                    {{#if Template.subscriptionsReady}}
+                        <div class="client-app-no-data">
+                            <span>Sorry, no chat sessions yet...</span>
+                        </div>
+                    {{/if}}
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="chatItem">
+    <div class="chat-session-item-link {{#if soonRemoved}}soon-removed{{/if}}">
+        <a href="#" class="js-open-chat-box {{#if isOpened}}chat-session-item-link-opened{{/if}}">
+            {{lastMessageDate}}
+        </a>
+        <span class="chat-session-item-icons">
+            {{#if needsReplay}}
+                <i class="ti-bell chat-session-item-icon urgent" title="Needs replay!"></i>
+            {{/if}}
+            {{#if isOpened}}
+                <i class="ti-comment-alt chat-session-item-icon" title="Opened"></i>
+            {{/if}}
+            {{#if soonRemoved}}
+                <i class="ti-announcement chat-session-item-icon" title="Will be removed soon. (because of chat archive days limit: 1 day left)"></i>
+            {{/if}}
+        </span>
+    </div>
+    <div class="chat-session-item-id {{#if soonRemoved}}soon-removed{{/if}}">
+        Id: {{.}}
+    </div>
+    <div class="chat-session-item-id {{#if soonRemoved}}soon-removed{{/if}}">
+        {{#if clientIp}}Client IP: {{clientIp}}{{else}}&nbsp;{{/if}}
+        <span class="chat-session-item-icons {{#unless isTouchDevice}}hover-visible{{/unless}}">
+            <i class="ti-na clickable js-ban-user-modal chat-session-item-icon" title="Ban user by IP address"></i>
+            <i class="ti-close clickable js-open-remove-modal chat-session-item-icon" title="Remove all by IP or Session Id"></i>
+        </span>
+    </div>
+</template>
+
+<template name="chatView">
+    <div class="s-chat-box-header">
+        <div class="s-chat-header-title" title="Client session id: {{userSessionId}}. Client IP address: {{clientIp}}">id: {{userSessionId}}</div>
+        <div class="s-chat-header-icon">
+            <i class="ti-close js-chat-box-header-close" title="Close chat box."></i>
+        </div>
+    </div>
+    <div class="s-chat-messages js-chat-messages">
+        {{#each messages}}
+            <div class="s-chat-message-item {{#if isFromClient}}s-chat-message-item-client{{/if}}">
+                {{#if isFromClient}}
+                    <div class="s-chat-message-item-avatar" title="User session id: {{userSessionId}}"></div>
+                {{/if}}
+                <div class="message">{{msg}}</div>
+            </div>
+        {{/each}}
+    </div>
+    <div class="s-chat-message-last-date {{#if isLastMessageFromClient}}from-client{{/if}}">
+        Last message: {{lastMessageDate}}
+    </div>
+    <textarea class="s-chat-submit-input js-chat-submit-input" rows="1" placeholder="Send a message..."></textarea>
+</template>
+
+<template name="chatBox">
+    <div class="s-chat-box js-chat-box" id="chat-box-{{userSessionId}}">
+        {{> chatView}}
+    </div>
+</template>
+
+<template name="footerSmall">
+    <div class="s-chat-footer-small">
+        <div class="footer-small-left {{#if isSidebarClosed}}closed{{/if}}">
+            <span>SimpleChat.Support </span>
+        </div>
+        <div class="footer-small-right {{#if isListingView}}app-listing{{/if}}">
+            <span><a href="/docs#support" class="js-docs-link">Support/Contact</a> | <a href="/docs#privacy-security" class="js-docs-link">Privacy/Security Policy</a></span>
+        </div>
+    </div>
+</template>

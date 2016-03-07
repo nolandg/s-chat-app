@@ -1,0 +1,1 @@
+Banned = new Mongo.Collection('banned');

@@ -1,0 +1,21 @@
+<template name="bannedListModal">
+    <div class="s-chat-modal-content">
+        <h2>
+            Banned IP's for this Client App
+        </h2>
+        <p class="spacing-bottom">
+            <strong>Client App Id: {{clientAppId}}</strong>
+        </p>
+        <ul class="spacing-bottom banned-ip-list">
+            {{#each bannedIps}}
+                <li>{{clientIp}} <a href="#" class="js-remove-ban" title="Remove banned IP"><i class="ti-close"></i></a></li>
+            {{/each}}
+        </ul>
+        <p class="spacing-bottom">You'll be able to edit these changes later.</p>
+        <p><input type="text" class="js-ban-ip-input" placeholder="Provide IP to ban"></p>
+    </div>
+    <div>
+        <a href="#" class="s-chat-modal-cancel-button js-close-modal">Close</a>
+        <a href="#" class="s-chat-modal-confirm-button js-ban-ip">Ban IP</a>
+    </div>
+</template>
