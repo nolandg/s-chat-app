@@ -16,17 +16,19 @@
 .s-chat-promo-main-container
     @extend .cf
     .intro-section-left
-        cell(1, 2)
-        padding rem-calc(80) rem-calc(15)
+        cell(1, 2, align: 'center')
+        .wrapper
+            padding 0 rem-calc(15)
         +below(rem-calc(1024))
             cell(3, 4)
         +below(rem-calc(680))
             stack()
     .intro-section-right
         cell(1, 2, align: 'center')
-        padding 0 rem-calc(15)
-        img
-            max-width 100%
+        .wrapper
+            padding rem-calc(30) rem-calc(15)
+            img
+                max-width 100%
         +below(rem-calc(1024))
             display none
     .intro-section
@@ -80,6 +82,7 @@
             img
                 width rem-calc(75)
                 margin-bottom rem-calc(20)
+                height 100%
             +below(rem-calc(600))
                 font-size rem-calc(28)
         .options-section-subheader
@@ -97,12 +100,13 @@
                 cell(1, 3)
                 background-color color-main-light
                 color color-main-contrast2
-                padding rem-calc(35)
-                padding-bottom rem-calc(110)
                 border-radius rem-calc(5)
                 box-shadow 0 rem-calc(5) rem-calc(20) rgba(color-main-dark, .05), 0 rem-calc(15) rem-calc(30) rem-calc(-10) rgba(color-main-dark, .3)
                 transition background-color .3s
                 position relative
+                .wrapper
+                    padding rem-calc(35)
+                    padding-bottom rem-calc(110)
                 &:hover
                     background-color darken(color-main-light, 2%)
                 .header
