@@ -88,30 +88,30 @@
 </template>
 
 <template name="chatView">
-    <div class="s-chat-box-header">
-        <div class="s-chat-header-title" title="Client session id: {{userSessionId}}. Client IP address: {{clientIp}}">id: {{userSessionId}}</div>
-        <div class="s-chat-header-icon">
+    <div class="s-chat-box-header-in-app">
+        <div class="s-chat-header-title-in-app" title="Client session id: {{userSessionId}}. Client IP address: {{clientIp}}">id: {{userSessionId}}</div>
+        <div class="s-chat-header-icon-in-app">
             <i class="ti-close js-chat-box-header-close" title="Close chat box."></i>
         </div>
     </div>
-    <div class="s-chat-messages js-chat-messages">
+    <div class="s-chat-messages-in-app js-chat-messages">
         {{#each messages}}
-            <div class="s-chat-message-item {{#if isFromClient}}s-chat-message-item-client{{/if}}">
+            <div class="s-chat-message-item-in-app {{#if isFromClient}}s-chat-message-item-client-in-app{{/if}}">
                 {{#if isFromClient}}
-                    <div class="s-chat-message-item-avatar" title="User session id: {{userSessionId}}"></div>
+                    <div class="s-chat-message-item-avatar-in-app" title="User session id: {{userSessionId}}"></div>
                 {{/if}}
                 <div class="message">{{msg}}</div>
             </div>
         {{/each}}
     </div>
-    <div class="s-chat-message-last-date {{#if isLastMessageFromClient}}from-client{{/if}}">
+    <div class="s-chat-message-last-date-in-app {{#if isLastMessageFromClient}}from-client{{/if}}">
         Last message: {{lastMessageDate}}
     </div>
-    <textarea class="s-chat-submit-input js-chat-submit-input" rows="1" placeholder="Send a message..."></textarea>
+    <textarea class="s-chat-submit-input-in-app js-chat-submit-input" rows="1" placeholder="Send a message..."></textarea>
 </template>
 
 <template name="chatBox">
-    <div class="s-chat-box js-chat-box" id="chat-box-{{userSessionId}}">
+    <div class="s-chat-box-in-app js-chat-box" id="chat-box-{{userSessionId}}">
         {{> chatView}}
     </div>
 </template>

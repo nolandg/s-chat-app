@@ -34,3 +34,4 @@ markdown
 simple:highlight.js
 percolate:synced-cron
 force-ssl
+schat:client-blaze

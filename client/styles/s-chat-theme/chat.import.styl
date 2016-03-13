@@ -1,110 +1,107 @@
-.s-chat-box
-    background-color darken(color-main-light, 10%)
-    max-width rem-calc(350)
-    width 95%
-    margin-left rem-calc(10)
-    margin-right rem-calc(10)
-    margin-bottom rem-calc(20)
-    float left
-    *
-        box-sizing border-box
-
 .client-app-chat-boxes
     min-width rem-calc(250)
+    .s-chat-box-matched
+        animation blinker .2s step-start 0s
+        animation-iteration-count 2
+    .s-chat-box-in-app
+        background-color darken(color-main-light, 10%)
+        max-width rem-calc(350)
+        width 95%
+        margin-left rem-calc(10)
+        margin-right rem-calc(10)
+        margin-bottom rem-calc(20)
+        float left
+        *
+            box-sizing border-box
+    .s-chat-box-header-in-app
+        width 100%
+        line-height rem-calc(35)
+        background-color color-main-contrast2
+        border rem-calc(1) solid color-main-contrast2
+        border-bottom 0
+        color color-main-light
+        font-size rem-calc(14)
+        position relative
+        font-weight 600
+        @extend .cf
+        .s-chat-header-icon-in-app
+            float right
+            margin-right rem-calc(12)
+            font-size rem-calc(18)
+            cursor pointer
+        .s-chat-header-title-in-app
+            float left
+            padding-left rem-calc(12)
+            font-weight 400
 
-.s-chat-box-matched
-    animation blinker .2s step-start 0s
-    animation-iteration-count 2
+    .s-chat-messages-in-app
+        background-color darken(color-main-light, 5%)
+        font-size rem-calc(13)
+        padding rem-calc(10)
+        height rem-calc(280)
+        border rem-calc(1) solid darken(color-main-light, 20%)
+        border-bottom 0
+        overflow-y auto
+        @extend .cf
+    .s-chat-message-last-date-in-app
+        background-color darken(color-main-light, 5%)
+        border-right rem-calc(1) solid darken(color-main-light, 20%)
+        border-left rem-calc(1) solid darken(color-main-light, 20%)
+        padding rem-calc(5) rem-calc(10)
+        font-size rem-calc(10)
+        font-weight 300
+        color lighten(color-main-dark, 50%)
+        width 100%
+        text-align right
+
+    .s-chat-message-item-in-app
+        background-color transparent
+        width 100%
+        margin-top rem-calc(3)
+        margin-bottom rem-calc(3)
+        word-wrap break-word
+        @extend .cf
+
+    .s-chat-message-item-avatar-in-app
+        display inline-block
+        text-align left
+        margin-right rem-calc(5)
+        width rem-calc(28)
+        height rem-calc(28)
+        line-height rem-calc(28)
+        text-align center
+        background-color color-main-contrast1
+        border-radius rem-calc(3)
+        vertical-align bottom
+        &:after
+            content "U"
+            color #fff
+            font-weight bold
+    .s-chat-message-item-in-app
+        text-align right
+        .message
+            display inline-block
+            text-align left
+            border-radius rem-calc(15)
+            padding rem-calc(5) rem-calc(8) rem-calc(4)
+            max-width 80%
+            width auto
+            background-color color-main-light
+            color lighten(color-main-dark, 10%)
+    .s-chat-message-item-client-in-app
+        text-align left
+    .s-chat-submit-input-in-app
+        width 100%
+        border 1px solid darken(color-main-light, 20%)
+        border-top 0
+        padding rem-calc(10)
+        outline none
+        resize none
+        font-size rem-calc(13)
+        margin 0
+        display block
+        font-family font-main
 
 @keyframes blinker
     50%
         opacity .5
-
-.s-chat-box-header
-    width 100%
-    line-height rem-calc(35)
-    background-color color-main-contrast2
-    border rem-calc(1) solid color-main-contrast2
-    border-bottom 0
-    color color-main-light
-    font-size rem-calc(14)
-    position relative
-    font-weight 600
-    @extend .cf
-    .s-chat-header-icon
-        float right
-        margin-right rem-calc(12)
-        font-size rem-calc(18)
-        cursor pointer
-    .s-chat-header-title
-        float left
-        padding-left rem-calc(12)
-        font-weight 400
-
-.s-chat-messages
-    background-color darken(color-main-light, 5%)
-    font-size rem-calc(13)
-    padding rem-calc(10)
-    height rem-calc(280)
-    border rem-calc(1) solid darken(color-main-light, 20%)
-    border-bottom 0
-    overflow-y auto
-    @extend .cf
-.s-chat-message-last-date
-    background-color darken(color-main-light, 5%)
-    border-right rem-calc(1) solid darken(color-main-light, 20%)
-    border-left rem-calc(1) solid darken(color-main-light, 20%)
-    padding rem-calc(5) rem-calc(10)
-    font-size rem-calc(10)
-    font-weight 300
-    color lighten(color-main-dark, 50%)
-    width 100%
-    text-align right
-
-.s-chat-message-item
-    background-color transparent
-    width 100%
-    margin-top rem-calc(3)
-    margin-bottom rem-calc(3)
-    word-wrap break-word
-    @extend .cf
-
-.s-chat-message-item-avatar
-    display inline-block
-    text-align left
-    margin-right rem-calc(5)
-    width rem-calc(28)
-    height rem-calc(28)
-    line-height rem-calc(28)
-    text-align center
-    background-color color-main-contrast1
-    border-radius rem-calc(3)
-    vertical-align bottom
-    &:after
-        content "U"
-        color #fff
-        font-weight bold
-.s-chat-message-item
-    text-align right
-    .message
-        display inline-block
-        text-align left
-        border-radius rem-calc(15)
-        padding rem-calc(5) rem-calc(8) rem-calc(4)
-        max-width 80%
-        width auto
-        background-color color-main-light
-        color lighten(color-main-dark, 10%)
-.s-chat-message-item-client
-    text-align left
-.s-chat-submit-input
-    width 100%
-    border 1px solid darken(color-main-light, 20%)
-    border-top 0
-    padding rem-calc(10)
-    outline none
-    resize none
-    font-size rem-calc(13)
-    margin 0
-    display block
-    font-family font-main
