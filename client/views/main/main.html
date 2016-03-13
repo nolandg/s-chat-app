@@ -30,7 +30,7 @@
 
 <template name="main">
     {{> header}}
-    <div class="{{#if currentUser}}s-chat-main-apps-container{{else}}s-chat-main-container{{/if}} {{#if promoPage}}promo-page{{/if}}">
+    <div class="{{#if currentUser}}s-chat-main-apps-container{{else}}s-chat-main-container{{/if}} {{#if promoPage}}promo-page{{/if}} {{#if docsPage}}docs-page{{/if}}">
         {{> Template.dynamic template=layout}}
         {{#if currentUser}}
             {{> footerSmall}}
