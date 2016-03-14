@@ -6,7 +6,7 @@ Meteor.startup(function () {
         welcomeMessage: 'Hi, this is the demo chat box! You can have the same in your app! Do you have any questions?',
         hostName: 'www.simplechat.support',
         labels: {
-            sendPlaceholder: 'Send the message... (press Enter to send)',
+            sendPlaceholder: 'Send the message... (Enter to send)',
             headerTitle: 'SimpleChat.Support Demo!'
         }
     });

@@ -9,7 +9,9 @@
         padding-bottom size-big-footer-height
     &.docs-page
         .s-chat-box-opener
-            bottom rem-calc(75)
+            +above(rem-calc(480))
+                bottom rem-calc(75)
+
 
 .s-chat-promo-container
     center(1200)
@@ -24,8 +26,12 @@
             padding 0 rem-calc(15)
         +below(rem-calc(1024))
             cell(3, 4)
+            margin-top rem-calc(45)
+            margin-bottom rem-calc(45)
         +below(rem-calc(680))
             stack()
+            margin-top rem-calc(45)
+            margin-bottom rem-calc(45)
     .intro-section-right
         cell(1, 2, align: 'center')
         .wrapper
@@ -75,6 +81,12 @@
     .options-section
         background-color darken(color-main-light, 5%)
         color color-maind-dark
+        .options-section-header-logo
+            display block
+            width rem-calc(75)
+            margin-bottom rem-calc(20)
+            margin-left auto
+            margin-right auto
         .options-section-header
             font-size rem-calc(32)
             font-weight 300
@@ -82,11 +94,6 @@
             margin-top 0
             .bold
                 font-weight 600
-            img
-                width rem-calc(75)
-                margin-bottom rem-calc(20)
-                min-height 100%
-                height auto
             +below(rem-calc(600))
                 font-size rem-calc(28)
         .options-section-subheader
@@ -215,3 +222,9 @@
             width rem-calc(80)
         a
             color color-main-contrast1
+
+// schat box style overwrite
+.s-chat-box
+    width auto
+    max-width rem-calc(300)
+    margin-left rem-calc(20)
