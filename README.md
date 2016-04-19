@@ -9,7 +9,7 @@ sChat (or SimpleChat or SimpleChat.Support) is an open source and very basic liv
 ```javascript
 {
     "public": {
-        "hostName": "SimpleChat.Support",
+        "hostName": "www.simplechat.support",
         "maxClientApps": 3,
         "maxChatHistoryInDays": 3
     },

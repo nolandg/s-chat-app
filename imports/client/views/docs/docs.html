@@ -137,7 +137,7 @@
             sChat.init('JMSZtbT2RdNrPYYRi', {
                 ssl: true,
                 welcomeMessage: 'Hi, how can I help you?',
-                hostName: 'SimpleChat.Support',
+                hostName: 'www.simplechat.support',
                 labels: {
                     sendPlaceholder: 'Send the message...',
                     headerTitle: 'Welcome on my website!'
@@ -156,7 +156,7 @@
 sChat.init('JMSZtbT2RdNrPYYRi', { // client app id - get it from sChat admin panel
     ssl: true, // SSL is in default enabled because on sChat we use SSL... anyway it should be used in any self hosted sChat app too
     welcomeMessage: 'Hi, how can I help you?', // you can set up welcome message, if you don't want it at all just remove the line in the config
-    hostName: 'SimpleChat.Support', // in default it is SimpleChat.Support, you need to change it in Self-hosted option
+    hostName: 'www.simplechat.support', // in default it is 'www.simplechat.support', you need to change it in Self-hosted option
     labels: {
         sendPlaceholder: 'Send the message...', // chatbox send message input placeholder
         headerTitle: 'Welcome on my website!' // chatbox header title
@@ -198,7 +198,7 @@ Meteor.startup(function () {
     sChat.init('JMSZtbT2RdNrPYYRi', {
         ssl: true,
         welcomeMessage: 'Hi, how can I help you?',
-        hostName: 'SimpleChat.Support',
+        hostName: 'www.simplechat.support',
         labels: {
             sendPlaceholder: 'Send the message...',
             headerTitle: 'Welcome on my website!'
@@ -249,7 +249,7 @@ Meteor.startup(function () {
 ```javascript
 {
     "public": {
-        "hostName": "SimpleChat.Support",
+        "hostName": "www.simplechat.support",
         "maxClientApps": 3,
         "maxChatHistoryInDays": 3
     },
