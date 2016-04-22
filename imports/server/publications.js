@@ -57,3 +57,17 @@ Meteor.publish('Meteor.users.emailNotifications', function () {
     }
     return this.ready();
 });
+
+Meteor.publish('Meteor.users.adminStatus', function (clientAppId) {
+    check(clientAppId, String);
+    const client = Client.findOne(clientAppId);
+    const adminId = client && client.ownerId;
+    if (adminId) {
+        return Meteor.users.find({_id: adminId}, {fields: {
+            'status.idle': 1,
+            'status.online': 1,
+            'status.lastLogin.date': 1
+        }});
+    }
+    return this.ready();
+});

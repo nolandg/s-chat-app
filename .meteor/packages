@@ -17,7 +17,6 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 check
 accounts-password
-kadira:flow-router
 kadira:blaze-layout
 momentjs:moment
 juliancwirko:s-grid
@@ -36,3 +35,5 @@ force-ssl
 schat:client-blaze
 standard-minifier-css
 standard-minifier-js
+mizzao:user-status
+kadira:flow-router@2.11.0
