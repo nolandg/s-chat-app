@@ -36,4 +36,4 @@ schat:client-blaze
 standard-minifier-css
 standard-minifier-js
 mizzao:user-status
-kadira:flow-router@2.11.0
+kadira:flow-router
