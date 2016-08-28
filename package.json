@@ -1,0 +1,30 @@
+{
+  "name": "simple-chat-support",
+  "version": "1.1.0",
+  "description": "Open source and very basic live chat app built with Meteor",
+  "main": "index.js",
+  "dependencies": {
+    "meteor-node-stubs": "~0.2.0",
+    "bcrypt": "^0.8.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juliancwirko/s-chat-app.git"
+  },
+  "keywords": [
+    "meteor",
+    "live",
+    "chat",
+    "ddp"
+  ],
+  "author": "Julian Ćwirko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/juliancwirko/s-chat-app/issues"
+  },
+  "homepage": "https://github.com/juliancwirko/s-chat-app#readme"
+}

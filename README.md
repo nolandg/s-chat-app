@@ -4,6 +4,13 @@
 
 sChat (or SimpleChat or SimpleChat.Support) is an open source and very basic live chat app written by a JavaScript/Meteor developer. It is free and MIT licensed. You can use it in a SaaS-like model on the website or you can also create your own self-hosted copy of the app.
 
+### Local run
+
+- `git clone https://github.com/juliancwirko/s-chat-app.git`
+- `cd s-chat-app`
+- `npm install`
+- `meteor --settings settings.json` (read more below)
+
 ### Documentation
 
 - [https://www.simplechat.support/docs](https://www.simplechat.support/docs)
@@ -13,7 +20,7 @@ sChat (or SimpleChat or SimpleChat.Support) is an open source and very basic liv
 ```javascript
 {
     "public": {
-        "hostName": "www.simplechat.support",
+        "hostName": "localhost:3000 (or your-host-name.com in the prod)",
         "maxClientApps": 3,
         "maxChatHistoryInDays": 3
     },
