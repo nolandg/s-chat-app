@@ -2,6 +2,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Meteor } from 'meteor/meteor';
 import { Tracker } from 'meteor/tracker';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
+import { GAnalytics } from 'meteor/datariot:ganalytics';
 
 import { sChatModal } from '../configs/modal.js';
 
@@ -23,6 +24,10 @@ FlowRouter.route('/', {
     }],
     name: 'promoIndex',
     action() {
+        // if you want to use Google Analitics
+        // you can also add it in other routes
+        // more info: https://atmospherejs.com/datariot/ganalytics
+        GAnalytics.pageview();
         BlazeLayout.render('main', {layout: 'promoIndex'});
     }
 });
@@ -36,6 +41,7 @@ FlowRouter.route('/apps', {
     }],
     name: 'clientAppList',
     action() {
+        GAnalytics.pageview();
         BlazeLayout.render('main', {layout: 'clientAppList'});
     }
 });
@@ -43,6 +49,7 @@ FlowRouter.route('/apps', {
 FlowRouter.route('/docs', {
     name: 'docs',
     action() {
+        GAnalytics.pageview();
         BlazeLayout.render('main', {layout: 'docs'});
     }
 });
@@ -55,6 +62,7 @@ FlowRouter.route('/client/:clientAppId', {
     }],
     name: 'clientAppView',
     action() {
+        GAnalytics.pageview();
         BlazeLayout.render('main', {layout: 'clientAppView'});
     }
 });
@@ -78,6 +86,7 @@ FlowRouter.route('/login', {
     }],
     name: 'sIdLoginView',
     action() {
+        GAnalytics.pageview();
         BlazeLayout.render('main', {layout: 'sIdLoginView'});
     }
 });
@@ -89,12 +98,14 @@ FlowRouter.route('/sign-up', {
     }],
     name: 'sIdRegisterView',
     action() {
+        GAnalytics.pageview();
         BlazeLayout.render('main', {layout: 'sIdRegisterView'});
     }
 });
 FlowRouter.route('/forgot-password', {
     name: 'sIdForgotPasswordView',
     action() {
+        GAnalytics.pageview();
         BlazeLayout.render('main', {layout: 'sIdForgotPasswordView'});
     }
 });

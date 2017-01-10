@@ -4,8 +4,9 @@
   "description": "Open source and very basic live chat app built with Meteor",
   "main": "index.js",
   "dependencies": {
-    "meteor-node-stubs": "~0.2.0",
-    "bcrypt": "^0.8.7"
+    "babel-runtime": "^6.20.0",
+    "bcrypt": "^0.8.7",
+    "meteor-node-stubs": "~0.2.0"
   },
   "devDependencies": {},
   "scripts": {

@@ -251,7 +251,10 @@ Meteor.startup(function () {
     "public": {
         "hostName": "www.simplechat.support",
         "maxClientApps": 3,
-        "maxChatHistoryInDays": 3
+        "maxChatHistoryInDays": 3,
+        "ga": {
+            "account": "UA-********-*"
+        }
     },
     "private": {
         "mainAppEmail": "your-email-address@gmail.com",
@@ -275,6 +278,10 @@ Meteor.startup(function () {
 
     <p>
         Next we have special Google and Facebook API keys which are needed when you want to use 'login with Google', 'login with Facebook' buttons. You can disable these features in 'both/accounts/s-id-config.js'. It is provided by the sId Meteor package. You can read more about it here: <a href="http://s-id.meteor.com">s-id.meteor.com</a>.
+    </p>
+
+    <p>
+        Google Analitics code ('ga' property) is of course optional.
     </p>
 
     <p><strong>Important:</strong> When you provide all those settings, you need to run your Meteor app with '--settings' flag. Example.</p>

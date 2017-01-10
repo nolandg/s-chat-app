@@ -22,7 +22,10 @@ sChat (or SimpleChat or SimpleChat.Support) is an open source and very basic liv
     "public": {
         "hostName": "localhost:3000 (or your-host-name.com in the prod)",
         "maxClientApps": 3,
-        "maxChatHistoryInDays": 3
+        "maxChatHistoryInDays": 3,
+        "ga": {
+            "account": "UA-********-*" (your google analitics code - optional)
+        }
     },
     "private": {
         "mainAppEmail": "your-email-address@gmail.com",
