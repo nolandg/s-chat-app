@@ -15,6 +15,8 @@ import './client-app-list.html';
 
 Template.clientAppList.onCreated(function () {
     this.subscribe('Client.appsList');
+    // reset counter
+    document.title = document.title.replace(/ *\([^)]*\) */g, '');
 });
 
 Template.clientAppList.helpers({

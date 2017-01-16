@@ -50,6 +50,27 @@ Template.clientAppView.onCreated(function () {
     }
 });
 
+Template.clientAppView.onRendered(function () {
+    this.autorun(function () {
+        let needsReplayCounter = 0;
+        const chatCursor = Chat.find({clientAppId: FlowRouter.getParam('clientAppId')}, {sort: {date: -1}});
+        const userSessionIdsIds = chatCursor.map((chat) => {
+            return chat.userSessionId;
+        });
+        const uniqUserSessionIds = _.uniq(userSessionIdsIds);
+        uniqUserSessionIds.forEach(userSessionId => {
+            if (Chat.findOne({userSessionId: userSessionId}, {sort: {date: -1}}).isFromClient) {
+                needsReplayCounter = needsReplayCounter + 1;
+            }
+        });
+        if (needsReplayCounter > 0) {
+            document.title = `(${needsReplayCounter}) ${document.title.replace(/ *\([^)]*\) */g, '')}`;
+        } else {
+            document.title = document.title.replace(/ *\([^)]*\) */g, '');
+        }
+    });
+});
+
 Template.clientAppView.helpers({
     client() {
         return Client.findOne({_id: FlowRouter.getParam('clientAppId')});
