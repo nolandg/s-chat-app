@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Email } from 'meteor/email';
 import {Chat, Client, Banned} from '../both/collections/collections.js';
+import { notifyAdmin } from './notify.js';
 
 
 // check if client app with this particular clientAppId exists in the database
@@ -58,18 +59,22 @@ Meteor.methods({
             throw new Meteor.Error(403, 'Error 403: Your IP has been banned!');
         }
 
-        Chat.insert({
-            msg: msg,
-            clientAppId: clientAppId,
-            userSessionId: userSessionId,
-            date: new Date(),
-            isFromClient: isFromClient,
-            clientIp: this.connection.clientAddress
-        });
+        const data = {
+          msg: msg,
+          clientAppId: clientAppId,
+          userSessionId: userSessionId,
+          date: new Date(),
+          isFromClient: isFromClient,
+          clientIp: this.connection.clientAddress
+        };
+
+        Chat.insert(data);
 
         this.unblock();
 
-        // check and send e-mail notification if needed
+        notifyAdmin(data);
+
+        // check and send email notification if needed
         if (clientAppId && isUserSessionIdNew(userSessionId)) {
             const client = Client.findOne({_id: clientAppId});
             const ownerId = client && client.ownerId;
