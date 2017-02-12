@@ -54,17 +54,19 @@ function notifyAdmin(data) {
 }
 
 bot.on('message', (payload) => {
-  const lastMessage = Chat.findOne({ isFromClient: true }, { sort: { date: 1 } });
-  const data = {
-    msg: payload.message.text,
-    clientAppId: lastMessage.clientAppId,
-    userSessionId: lastMessage.userSessionId,
-    date: new Date(),
-    isFromClient: false,
-    clientIp: '0.0.0.0',
-  };
+  Fiber(() => {
+    const lastMessage = Chat.findOne({ isFromClient: true }, { sort: { date: 1 } });
+    const data = {
+      msg: payload.message.text,
+      clientAppId: lastMessage.clientAppId,
+      userSessionId: lastMessage.userSessionId,
+      date: new Date(),
+      isFromClient: false,
+      clientIp: '0.0.0.0',
+    };
 
-  Chat.insert(data);
+    Chat.insert(data);
+  }).run();
 });
 
 http.createServer(bot.middleware()).listen(7034);

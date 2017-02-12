@@ -6,6 +6,7 @@
   "dependencies": {
     "babel-runtime": "^6.20.0",
     "bcrypt": "^0.8.7",
+    "fibers": "^1.0.15",
     "http": "0.0.0",
     "messenger-bot": "^2.4.0",
     "meteor-node-stubs": "~0.2.0"
