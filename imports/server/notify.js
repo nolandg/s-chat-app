@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { WebApp } from 'meteor/webapp';
 import { Chat } from '../both/collections/collections.js';
+import Fiber from 'fibers';
 
 const settings = Meteor.settings.private.fbMessenger;
 
@@ -55,7 +56,8 @@ function notifyAdmin(data) {
 
 bot.on('message', (payload) => {
   Fiber(() => {
-    const lastMessage = Chat.findOne({ isFromClient: true }, { sort: { date: 1 } });
+    const lastMessage = Chat.findOne({}, { sort: { date: 1 } });
+	console.log('Last Message: ', lastMessage);
     const data = {
       msg: payload.message.text,
       clientAppId: lastMessage.clientAppId,
