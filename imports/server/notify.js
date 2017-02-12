@@ -1,4 +1,8 @@
+import { Meteor } from 'meteor/meteor';
 import { WebApp } from 'meteor/webapp';
+import { Chat } from '../both/collections/collections.js';
+
+const settings = Meteor.settings.private.fbMessenger;
 
 const http = require('http');
 const Bot = require('messenger-bot');
@@ -16,43 +20,52 @@ WebApp.connectHandlers.use('/x', (req, res) => {
 });
 
 const bot = new Bot({
-  token: 'EAAUiVTkV4osBAO1D1zKlvhXdn6Wggk07mPIjDDyr8KnvflPc7ECSAibJ5J3NDKsw7mWDrkaRgZCEWgef3lmN2cPaRYhqNi4UFmc8SX5bsQxKTaMDvWZBqJaiNKdV9CrmYQEMZCgQpLxuqZB8S8ZA4SbHx7u0WXXaTsyRKNHPZBTgZDZD',
-  verify: 'peachypaws',
-  app_secret: 'a9965387317cec7bc0a4d535dd935cd8',
+  token: settings.pageAccessToken,
+  verify: settings.verifyToken,
+  app_secret: settings.appSecret,
 });
 
 bot.on('error', (err) => {
   console.log(err.message);
 });
 
-bot.on('message', (payload, reply) => {
-  console.log('on message');
-  const text = payload.message.text;
+function sendMessage(recipientId, text) {
+  const message = {
+    text,
+  };
 
-  bot.getProfile(payload.sender.id, (err, profile) => {
-    if (err) throw err;
+  bot.sendMessage(recipientId, message, (error, info) => {
+    if (error) {
+      console.error(error);
+      return;
+    }
 
-    reply({ text }, (err) => {
-      if (err) throw err;
-	  console.log('sender: ', payload.sender);
-	  console.log('Profile: ', profile);
-      console.log(`Echoed back to ${profile.first_name} ${profile.last_name}: ${text}`);
-    
-      notifyAdmin();  
-	});
+    console.log(info);
   });
-});
-
-function notifyAdmin() {
- bot.sendMessage(1425630790804760, {text: 'Test message'}, (error, info) => {
-   if (error) {
-       console.error(error);
-       return;
-     }
-  
-     console.log(info);
-   });
 }
+
+function notifyAdmin(data) {
+  const trucatedSession = data.userSessionId.substr(0, 3) + '...' + data.userSessionId.substr(-3, 3);
+  const text = `[${trucatedSession}]\r\n\r\n${data.msg}`;
+
+  settings.idsToNotify.forEach((id) => {
+    sendMessage(id, text);
+  });
+}
+
+bot.on('message', (payload) => {
+  const lastMessage = Chat.findOne({ isFromClient: true }, { sort: { date: 1 } });
+  const data = {
+    msg: payload.message.text,
+    clientAppId: lastMessage.clientAppId,
+    userSessionId: lastMessage.userSessionId,
+    date: new Date(),
+    isFromClient: false,
+    clientIp: '0.0.0.0',
+  };
+
+  Chat.insert(data);
+});
 
 http.createServer(bot.middleware()).listen(7034);
 export { notifyAdmin };
