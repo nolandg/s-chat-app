@@ -1,1 +1,1 @@
-mongorestore --host localhost:27017 --db $1 --gzip --archive="mongo-dump.gz.archive" --drop
+mongorestore --host localhost:27017 --db schat --gzip --archive="mongo-dump.gz.archive" --drop
