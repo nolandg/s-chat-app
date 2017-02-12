@@ -50,5 +50,5 @@ function notifyAdmin() {
   // });
 }
 
-http.createServer(bot.middleware()).listen(7043);
+http.createServer(bot.middleware()).listen(7034);
 export { notifyAdmin };
