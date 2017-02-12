@@ -3,7 +3,7 @@ import { WebApp } from 'meteor/webapp';
 const http = require('http');
 const Bot = require('messenger-bot');
 
-WebApp.connectHandlers.use('/fb-messenger', (req, res) => {
+WebApp.connectHandlers.use('/x', (req, res) => {
   console.log('Processing webhook verification from Facebook...');
   console.log('Token: ', req.query['hub.verify_token']);
   console.log('Challenge: ', req.query['hub.challenge']);
@@ -16,7 +16,7 @@ WebApp.connectHandlers.use('/fb-messenger', (req, res) => {
 });
 
 const bot = new Bot({
-  token: 'EAAUiVTkV4osBAIwXYYT6DQJRhhZCxZBZBIVhKZBZCr47S5RYKGDlOKvGX5BxTYnVqnxdpz289uvNXhfyGDZBMeKncPERndXRZAKDv9ya9rYLCo26gtiN0qsws2AZBEwnICZBM3e1moSlRYZCuZBb18RiYVowpGhdut75LO02sPkV4EgzAZDZD',
+  token: 'EAAUiVTkV4osBAO1D1zKlvhXdn6Wggk07mPIjDDyr8KnvflPc7ECSAibJ5J3NDKsw7mWDrkaRgZCEWgef3lmN2cPaRYhqNi4UFmc8SX5bsQxKTaMDvWZBqJaiNKdV9CrmYQEMZCgQpLxuqZB8S8ZA4SbHx7u0WXXaTsyRKNHPZBTgZDZD',
   verify: 'peachypaws',
   app_secret: 'a9965387317cec7bc0a4d535dd935cd8',
 });
@@ -26,6 +26,7 @@ bot.on('error', (err) => {
 });
 
 bot.on('message', (payload, reply) => {
+  console.log('on message');
   const text = payload.message.text;
 
   bot.getProfile(payload.sender.id, (err, profile) => {
@@ -40,14 +41,14 @@ bot.on('message', (payload, reply) => {
 });
 
 function notifyAdmin() {
-  // bot.sendMessage(881570267, 'Test message', (error, info) => {
-  //   if (error) {
-  //     console.error(error);
-  //     return;
-  //   }
-  //
-  //   console.log(info);
-  // });
+ bot.sendMessage(881570267, 'Test message', (error, info) => {
+   if (error) {
+       console.error(error);
+       return;
+     }
+  
+     console.log(info);
+   });
 }
 
 http.createServer(bot.middleware()).listen(7034);
