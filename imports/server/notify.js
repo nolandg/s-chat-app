@@ -34,14 +34,17 @@ bot.on('message', (payload, reply) => {
 
     reply({ text }, (err) => {
       if (err) throw err;
-
+	  console.log('sender: ', payload.sender);
+	  console.log('Profile: ', profile);
       console.log(`Echoed back to ${profile.first_name} ${profile.last_name}: ${text}`);
-    });
+    
+      notifyAdmin();  
+	});
   });
 });
 
 function notifyAdmin() {
- bot.sendMessage(881570267, 'Test message', (error, info) => {
+ bot.sendMessage(1425630790804760, {text: 'Test message'}, (error, info) => {
    if (error) {
        console.error(error);
        return;
