@@ -47,24 +47,35 @@ bot.on('message', (payload) => {
   console.log('Received Facebook message from contact ID: ', payload.sender.id);
 
   fiber(() => {
-    const admin = FbAdmins.find({ contactId: payload.sender.id });
-    const lowerCaseText = payload.message.text.toLowerCase();
-    if (admin && (lowerCaseText.indexOf('pawson') !== -1)) {
+    const admin = FbAdmins.findOne({ contactId: payload.sender.id });
+    if(!admin){
+	  // Received a message from a contact ID that's not registered so ignore it
+	  return;
+	}
+
+	const lowerCaseText = payload.message.text.toLowerCase();
+    if (lowerCaseText.indexOf('pawson') !== -1) {
       // This is a control message putting the admin online
-      FbAdmins.update(admin._id, { $set: { online: true } });
+      FbAdmins.update(admin._id, { '$set': { online: true } });
       return;
-    } else if (admin && (lowerCaseText.indexOf('pawsoff') !== -1)) {
+    } else if (lowerCaseText.indexOf('pawsoff') !== -1) {
       // This is a control message putting the admin online
-      FbAdmins.update(admin._id, { $set: { online: false } });
+      FbAdmins.update(admin._id, { '$set': { online: false } });
       return;
     }
 
-    if (admin && !admin.online) {
-      // update admin online status, they must be online if sending a message
-      FbAdmins.update(admin._id, { $set: { online: true } });
+    if (!admin.online) {
+      console.log('Admin not online');
+	  // update admin online status, they must be online if sending a message
+      const result = FbAdmins.update(admin._id, { $set: { online: true } });
+	  console.log('Result: ', result);
     }
+
+	console.log('Admin: ', admin);
 
     const lastMessage = Chat.findOne({ isFromClient: true }, { sort: { date: -1 } });
+	if(!lastMessage) return;
+
     const data = {
       msg: payload.message.text,
       clientAppId: lastMessage.clientAppId,

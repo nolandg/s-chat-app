@@ -64,6 +64,6 @@
   align-self: center;
   margin-right: 10px;
 }
-.edit-fb-admins-wrapper .presence.online{
+.edit-fb-admins-wrapper .presence.true{
   background-color: #0B0;
 }
