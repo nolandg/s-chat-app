@@ -21,7 +21,7 @@ function sendMessage(recipientId, text) {
     text,
   };
 
-  bot.sendMessage(recipientId, message, (error, info) => {
+  bot.sendMessage(recipientId, message, (error) => {
     if (error) {
       console.error(error);
       return;
