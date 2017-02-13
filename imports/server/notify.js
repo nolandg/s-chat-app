@@ -21,11 +21,13 @@ function sendMessage(recipientId, text) {
     text,
   };
 
+  console.log('Sending message to: ', recipientId);
   bot.sendMessage(recipientId, message, (error) => {
     if (error) {
       console.error(error);
       return;
     }
+    console.log('Sent message to: ', recipientId);
   });
 }
 
@@ -39,6 +41,7 @@ function notifyAdmin(data) {
 }
 
 bot.on('message', (payload) => {
+  console.log('Received message: ', payload);
   fiber(() => {
     const lastMessage = Chat.findOne({ isFromClient: true }, { sort: { date: -1 } });
     const data = {
