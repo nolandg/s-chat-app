@@ -56,8 +56,7 @@ function notifyAdmin(data) {
 
 bot.on('message', (payload) => {
   Fiber(() => {
-    const lastMessage = Chat.findOne({}, { sort: { date: 1 } });
-	console.log('Last Message: ', lastMessage);
+    const lastMessage = Chat.findOne({isFromClient: true}, { sort: { date: 1 } });
     const data = {
       msg: payload.message.text,
       clientAppId: lastMessage.clientAppId,
