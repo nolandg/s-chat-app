@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Email } from 'meteor/email';
-import { Chat, Client, Banned } from '../both/collections/collections.js';
-import { notifyAdmin } from './notify.js';
+import { Chat, Client, Banned, FbAdmins } from '../both/collections/collections.js';
+import { notifyAdmins } from './fb-messenger.js';
 
 
 // check if client app with this particular clientAppId exists in the database
@@ -42,8 +42,34 @@ const isUserSessionIdNew = function (userSessionId) {
 
 // Meteor methods declarations starts here:
 Meteor.methods({
-    // add new message - available also for client apps
 
+  // Add a new FB Admin who will receive notifications
+  addFbAdmin(data) {
+    check(data, Object);
+    if (this.userId) {
+      data.ownerId = this.userId;
+      FbAdmins.insert(data);
+    }
+  },
+
+  // Update FB Admin who will receive notifications
+  updateFbAdmin(data) {
+    check(data, Object);
+    const admin = FbAdmins.findOne(data._id);
+    if (!admin || !this.userId || admin.ownerId !== this.userId) return;
+
+    FbAdmins.update(data._id, { '$set': data });
+  },
+
+  // Remove a FB Admin
+  removeFbAdmin(id) {
+    check(id, String);
+    if (this.userId) {
+      FbAdmins.remove({ _id: id, ownerId: this.userId });
+    }
+  },
+
+  // add new message - available also for client apps
   addChatMessage(msg, clientAppId, userSessionId, isFromClient) {
     check(msg, String);
     check(clientAppId, String);
@@ -59,7 +85,7 @@ Meteor.methods({
       throw new Meteor.Error(403, 'Error 403: Your IP has been banned!');
     }
 
-    const data = {
+    const message = {
       msg,
       clientAppId,
       userSessionId,
@@ -68,15 +94,15 @@ Meteor.methods({
       clientIp: this.connection.clientAddress,
     };
 
-    Chat.insert(data);
+    Chat.insert(message);
 
     this.unblock();
 
-    if (data.isFromClient) {
-      notifyAdmin(data);
+    if (message.isFromClient) {
+      notifyAdmins(message);
     }
 
-        // check and send email notification if needed
+    // check and send email notification if needed
     if (clientAppId && isUserSessionIdNew(userSessionId)) {
       const client = Client.findOne({ _id: clientAppId });
       const ownerId = client && client.ownerId;

@@ -1,0 +1,69 @@
+.edit-fb-admins-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.edit-fb-admins-wrapper h1{
+  text-align: center;
+}
+.edit-fb-admins-wrapper input{
+  box-shadow: none;
+  outline: none;
+  padding: 5px 5px;
+  border: none;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.edit-fb-admins-wrapper button{
+  outline: none;
+  box-shadow: none;
+  padding: 5px 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 7em;
+  flex-basis: 7em;
+  background: none;
+  border: none;
+}
+.edit-fb-admins-wrapper .js-update,
+.edit-fb-admins-wrapper .js-submit-new-admin{
+  background-color: #0B0;
+  color: #FFF;
+}
+.edit-fb-admins-wrapper .js-remove{
+  background-color: #B00;
+  color: #FFF;
+}
+.edit-fb-admins-wrapper > div{
+  margin: 30px 20px;
+}
+.edit-fb-admins-wrapper .admin-list > div,
+.add-new-admin {
+  padding: 0px 10px;
+  margin: 15px 10px;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  background-color: #EEE;
+  border-radius: 5px;
+  flex-wrap: wrap;
+}
+.edit-fb-admins-wrapper .admin-list > div > *,
+.add-new-admin > *{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.add-new-admin{
+  padding-left: 40px;
+}
+.edit-fb-admins-wrapper .presence{
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #B00;
+  align-self: center;
+  margin-right: 10px;
+}
+.edit-fb-admins-wrapper .presence.online{
+  background-color: #0B0;
+}

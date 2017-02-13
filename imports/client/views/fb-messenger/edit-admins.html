@@ -1,0 +1,24 @@
+<template name="editFbAdmins">
+  <div class="edit-fb-admins-wrapper">
+    <div>
+      <h1>Edit Facebook Admins</h1>
+      <div class="admin-list">
+        {{#each admin in fbAdmins}}
+            <div data-id="{{admin._id}}">
+              <span class="presence {{admin.online}}"></span>
+              <input value="{{admin.name}}" class="name" placeholder="Name" />
+              <input value="{{admin.contactId}}" class="contact-id" placeholder="Contact ID" />
+              <button class="js-update">Save</button>
+              <button class="js-remove">Remove</button>
+            </div>
+        {{/each}}
+      </div>
+
+      <div class="add-new-admin">
+        <input id="name-input" placeholder="Name" class="name">
+        <input id="contact-id-input" placeholder="FB Messenger contact ID" class="contact-id">
+        <button class="js-submit-new-admin">Add New</button>
+      </div>
+    </div>
+  </div>
+</template>
