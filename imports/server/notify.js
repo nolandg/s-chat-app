@@ -26,8 +26,6 @@ function sendMessage(recipientId, text) {
       console.error(error);
       return;
     }
-
-    console.log(info);
   });
 }
 
