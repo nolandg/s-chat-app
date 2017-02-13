@@ -1,24 +1,10 @@
 import { Meteor } from 'meteor/meteor';
-import { WebApp } from 'meteor/webapp';
+import fiber from 'fibers';
+import http from 'http';
+import Bot from 'messenger-bot';
 import { Chat } from '../both/collections/collections.js';
-import Fiber from 'fibers';
 
 const settings = Meteor.settings.private.fbMessenger;
-
-const http = require('http');
-const Bot = require('messenger-bot');
-
-WebApp.connectHandlers.use('/x', (req, res) => {
-  console.log('Processing webhook verification from Facebook...');
-  console.log('Token: ', req.query['hub.verify_token']);
-  console.log('Challenge: ', req.query['hub.challenge']);
-  res.writeHead(200);
-  if (req.query['hub.verify_token'] === 'peachypaws') {
-    res.end(req.query['hub.challenge']);
-  } else {
-    res.end('Not peachy. Sorry.');
-  }
-});
 
 const bot = new Bot({
   token: settings.pageAccessToken,
@@ -55,8 +41,8 @@ function notifyAdmin(data) {
 }
 
 bot.on('message', (payload) => {
-  Fiber(() => {
-    const lastMessage = Chat.findOne({isFromClient: true}, { sort: { date: 1 } });
+  fiber(() => {
+    const lastMessage = Chat.findOne({ isFromClient: true }, { sort: { date: -1 } });
     const data = {
       msg: payload.message.text,
       clientAppId: lastMessage.clientAppId,
