@@ -21,13 +21,11 @@ function sendMessage(recipientId, text) {
     text,
   };
 
-  console.log('Sending message to: ', recipientId);
   bot.sendMessage(recipientId, message, (error) => {
     if (error) {
       console.error(error);
       return;
     }
-    console.log('Sent message to: ', recipientId);
   });
 }
 
@@ -86,11 +84,11 @@ function attachMessageToLastChat(text, clientAppIds) {
 
 function sendMessageToOtherAdmins(fbAdmin, owner, text, clientAppIds) {
   const lastMessage = getLastMessageFromClient(clientAppIds);
-  const otherFbAdmins = FbAdmins.find({ ownerId: owner._id, _id: { $not: fbAdmin._id } }).fetch();
+  const otherFbAdmins = FbAdmins.find({ ownerId: owner._id, _id: { $ne: fbAdmin._id } }).fetch();
   const sessionId = shortenUserSessionId(lastMessage.userSessionId);
+  const messageText = `${sessionId}\r\n${fbAdmin.name} writes:\r\n\r\n${text}`;
 
   otherFbAdmins.forEach((admin) => {
-    const messageText = `${sessionId}\r\n${admin.name} writes:\r\n\r\n${text}`;
     sendMessage(admin.contactId, messageText);
   });
 }
@@ -100,14 +98,14 @@ bot.on('message', (payload) => {
 
   fiber(() => {
     const fbAdmin = FbAdmins.findOne({ contactId: payload.sender.id });
-    const owner = Meteor.users.findOne(fbAdmin.ownerId);
-    const clientAppIds = Client.find({ ownerId: owner._id }).fetch();
-    const text = payload.message.text;
-
     if (!fbAdmin) {
       // Received a message from a contact ID that's not registered so ignore it
       return;
     }
+
+    const owner = Meteor.users.findOne(fbAdmin.ownerId);
+    const clientAppIds = Client.find({ ownerId: owner._id }).fetch().map((client)=>{return client._id});
+    const text = payload.message.text;
 
     if (handleControlMessage(text, fbAdmin)) {
       // Don't do anything else with control messages
