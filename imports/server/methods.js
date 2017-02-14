@@ -98,9 +98,7 @@ Meteor.methods({
 
     this.unblock();
 
-    if (message.isFromClient) {
-      notifyAdmins(message);
-    }
+    notifyAdmins(message);
 
     // check and send email notification if needed
     if (clientAppId && isUserSessionIdNew(userSessionId)) {
