@@ -11,11 +11,18 @@ const isBanned = function (clientAppId, clientIp) {
   return Banned.find({ clientAppId, clientIp }).count();
 };
 
-Meteor.publish('FbAdmins', function () {
+Meteor.publish('FbAdmins', function (clientAppId) {
+  check(clientAppId, Match.Maybe(String));
+  let ownerId;
   if (this.userId) {
-    return FbAdmins.find({ ownerId: this.userId }, { fields: { name: 1, contactId: 1, online: 1 } });
+    ownerId = this.userId;
+  } else {
+    const client = Client.findOne(clientAppId);
+    if (!client) return this.ready();
+    ownerId = client.ownerId;
   }
-  return this.ready();
+
+  return FbAdmins.find({ ownerId }, { fields: { name: 1, contactId: 1, online: 1 } });
 });
 
 Meteor.publish('Chat.messagesList', function (clientAppId, userSessionId) {

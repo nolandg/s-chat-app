@@ -26,6 +26,7 @@ Template.editFbAdmins.events({
     };
     Meteor.call('addFbAdmin', data, () => {
       tmpl.$('#contact-id-input').val('');
+      tmpl.$('#name-input').val('');
     });
   },
   'click .js-remove': function (event) {
