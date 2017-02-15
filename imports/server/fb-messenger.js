@@ -30,12 +30,13 @@ function sendMessage(recipientId, text) {
 }
 
 function shortenUserSessionId(id) {
-  return '[' + id.substr(0, 3) + '.' + id.substr(-3, 3) + ']';
+  // shortens id to first 4 characters and makes it all uppercase
+  return ('[' + id.substr(0, 4) + ']').toUpperCase();
 }
 
 function renderMessageText(sessionId, from, text) {
   const shortId = shortenUserSessionId(sessionId);
-  return `${shortId} ${from}\r\n------------------------------\r\n${text}`;
+  return `${shortId} ${from}\r\n------------------------------------------------\r\n${text}`;
 }
 
 function notifyAdmins(data) {
