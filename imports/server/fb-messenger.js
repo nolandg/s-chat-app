@@ -30,13 +30,17 @@ function sendMessage(recipientId, text) {
 }
 
 function shortenUserSessionId(id) {
-  return '<' + id.substr(0, 3) + '...' + id.substr(-3, 3) + '>';
+  return '[' + id.substr(0, 3) + '.' + id.substr(-3, 3) + ']';
+}
+
+function renderMessageText(sessionId, from, text) {
+  const shortId = shortenUserSessionId(sessionId);
+  return `${shortId} ${from}\r\n------------------------------\r\n${text}`;
 }
 
 function notifyAdmins(data) {
-  const sessionId = shortenUserSessionId(data.userSessionId);
   const from = data.isFromClient ? 'Customer writes:' : 'Support writes';
-  const text = `${sessionId}\r\n${from}\r\n\r\n${data.msg}`;
+  const text = renderMessageText(data.userSessionId, from, data.msg);
 
   const client = Client.findOne(data.clientAppId);
   const admins = FbAdmins.find({ ownerId: client.ownerId }).fetch();
@@ -85,8 +89,7 @@ function attachMessageToLastChat(text, clientAppIds) {
 function sendMessageToOtherAdmins(fbAdmin, owner, text, clientAppIds) {
   const lastMessage = getLastMessageFromClient(clientAppIds);
   const otherFbAdmins = FbAdmins.find({ ownerId: owner._id, _id: { $ne: fbAdmin._id } }).fetch();
-  const sessionId = shortenUserSessionId(lastMessage.userSessionId);
-  const messageText = `${sessionId}\r\n${fbAdmin.name} writes:\r\n\r\n${text}`;
+  const messageText = renderMessageText(lastMessage.userSessionId, fbAdmin.name, text);
 
   otherFbAdmins.forEach((admin) => {
     sendMessage(admin.contactId, messageText);
@@ -104,7 +107,7 @@ bot.on('message', (payload) => {
     }
 
     const owner = Meteor.users.findOne(fbAdmin.ownerId);
-    const clientAppIds = Client.find({ ownerId: owner._id }).fetch().map((client)=>{return client._id});
+    const clientAppIds = Client.find({ ownerId: owner._id }).fetch().map((client) => { return client._id; });
     const text = payload.message.text;
 
     if (handleControlMessage(text, fbAdmin)) {
