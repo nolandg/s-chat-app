@@ -36,11 +36,11 @@ function shortenUserSessionId(id) {
 
 function renderMessageText(sessionId, from, text) {
   const shortId = shortenUserSessionId(sessionId);
-  return `${shortId} ${from}\r\n------------------------------------------------\r\n${text}`;
+  return `${shortId} ${from} writes:\r\n------------------------------------------------\r\n${text}`;
 }
 
 function notifyAdmins(data) {
-  const from = data.isFromClient ? 'Customer writes:' : 'Support writes';
+  const from = data.isFromClient ? 'Customer:' : 'Support';
   const text = renderMessageText(data.userSessionId, from, data.msg);
 
   const client = Client.findOne(data.clientAppId);
